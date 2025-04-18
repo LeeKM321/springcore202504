@@ -14,12 +14,12 @@ CREATE TABLE scores (
 
  */
 
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 // 데이터베이스 테이블과 1:1로 매칭되는 필드를 가진 객체: Entity
 @Getter @Setter @ToString
+@NoArgsConstructor
+@AllArgsConstructor
 public class Score {
 
     private int stuNum;
