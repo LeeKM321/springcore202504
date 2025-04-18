@@ -31,7 +31,10 @@ dependencies {
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 
+    // mysql 커넥터 드라이버
     runtimeOnly 'com.mysql:mysql-connector-j'
+    // spring에서 jdbc를 좀 더 쉽게 사용할 수 있게 해주는 라이브러리
+    implementation 'org.springframework.boot:spring-boot-starter-data-jdbc'
 }
 
 tasks.named('test') {

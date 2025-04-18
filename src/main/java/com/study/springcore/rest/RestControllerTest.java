@@ -12,16 +12,17 @@ import java.util.Map;
 // RestController 안에 있는 모든 메서드는 return 값이 JSON으로 변환되어
 // 클라이언트에게 전송됩니다. -> 더이상 백엔드는 화면에 관여하지 않습니다.
 @RestController
+@RequestMapping("/rest") // 공통 url 처리
 public class RestControllerTest {
 
-    @GetMapping("/rest/list")
+    @GetMapping("/list")
 //    @ResponseBody -> 클라이언트로 데이터를 JSON로 변환 후 바로 던지는 문법.
     public List<String> method1() {
         List<String> list = List.of("hello", "world", "spring", "boot", "yaho");
         return list;
     }
 
-    @PostMapping("/rest/object")
+    @PostMapping("/object")
     public Person method2() {
         Person person = new Person();
         person.setAge(30);
@@ -35,7 +36,7 @@ public class RestControllerTest {
     // 2. JSON 형태로 생긴 클래스가 없다? -> Map으로 받으면 됩니다. (Object 조심!)
     // 클라이언트가 전송하는 데이터가 JSON이라면 @RequestBody를 붙여야
     // 자바 객체로 변환이 가능합니다. -> 안붙이면 텅텅 빈 객체를 확인할 수 있음.
-    @PostMapping("/rest/regist")
+    @PostMapping("/regist")
     public String method3(@RequestBody Map<String, Object> map) {
         System.out.println("전달된 데이터: " + map);
         return "ok!";
@@ -43,7 +44,7 @@ public class RestControllerTest {
 
     // url에 포함되어있는 특정 정보 얻어오기
     // @PathVariable: url에 포함되어있는 특정 값을 얻어옴.
-    @GetMapping("/rest/{userId}/posts/{bno}")
+    @GetMapping("/{userId}/posts/{bno}")
     public String method4(@PathVariable int bno,
                           @PathVariable String userId) {
         System.out.println("bno: " + bno);
@@ -53,7 +54,7 @@ public class RestControllerTest {
 
     // 쿼리 스트링(쿼리 파라미터)로 전달되는 데이터 받기
     // http://localhost:8181/rest/posts?category=title&sort=latest&keyword=야호
-    @GetMapping("/rest/posts")
+    @GetMapping("/posts")
     public String method5(@RequestParam String category,
                           @RequestParam("sort") String s,
                           @RequestParam("keyword") String k) {
